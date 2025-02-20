@@ -23,7 +23,7 @@ export const classList = [
     location: '제주시 이도 2동',
   },
   {
-    id: '1',
+    id: '3',
     img: classList3,
     name: '해녀의 바당요리3',
     description: '해녀의 불턱에서 성게국과 옥돔구이를 만드는 소중한 시간을 함께 해요.',
@@ -31,7 +31,7 @@ export const classList = [
     location: '제주시 이도 2동',
   },
   {
-    id: '1',
+    id: '4',
     img: classList4,
     name: '해녀의 바당요리4',
     description: '해녀의 불턱에서 성게국과 옥돔구이를 만드는 소중한 시간을 함께 해요.',
@@ -39,7 +39,7 @@ export const classList = [
     location: '제주시 이도 2동',
   },
   {
-    id: '1',
+    id: '5',
     img: classList5,
     name: '해녀의 바당요리5',
     description: '해녀의 불턱에서 성게국과 옥돔구이를 만드는 소중한 시간을 함께 해요.',

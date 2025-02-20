@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { IconButton, Text } from '@goorm-dev/vapor-core'
 import { CalendarIcon, ChevronLeftOutlineIcon, LocationIcon } from '@goorm-dev/vapor-icons'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -13,6 +15,10 @@ const ClassListPage = () => {
   const safeSlug = slug ?? ''
   const category = CATEGORY_LIST.find((category) => category.slug === slug)
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [slug])
+
   return (
     <div className="p-[var(--space-200)]">
       <div className="relative flex h-[48px] items-center justify-center">
@@ -27,7 +33,7 @@ const ClassListPage = () => {
           style={{
             position: 'absolute',
             top: 0,
-            left: 0,
+            left: -16,
           }}
         >
           <ChevronLeftOutlineIcon size="24" />
