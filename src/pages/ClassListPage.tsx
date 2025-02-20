@@ -1,14 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import { IconButton, Text } from '@goorm-dev/vapor-core'
-import { CalendarIcon, ChevronLeftOutlineIcon, LocationIcon } from '@goorm-dev/vapor-icons'
-import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 
-import { CATEGORY_LIST } from '@/constants/categories'
-import { imgList } from '@/constants/classList'
-import { ROUTES } from '@/constants/routes'
+
+import { IconButton, Text } from '@goorm-dev/vapor-core';
+import { CalendarIcon, ChevronLeftOutlineIcon, LocationIcon } from '@goorm-dev/vapor-icons';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
+
+import { CATEGORY_LIST } from '@/constants/categories';
+import { imgList } from '@/constants/classList';
+import { ROUTES } from '@/constants/routes';
+
+
+
+
 
 interface Clazz {
   category_id: number
@@ -37,7 +45,7 @@ const ClassListPage = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/category/1`)
+        const response = await axios.get(`http://http://nginx-service/api/category/1`)
         setClassList(response.data)
 
         // 로컬 테스트용
