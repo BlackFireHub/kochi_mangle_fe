@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { Button, IconButton, Text } from '@goorm-dev/vapor-core'
+import { Button, Dialog, IconButton, Text } from '@goorm-dev/vapor-core'
 import {
   CalendarIcon,
   ChevronLeftOutlineIcon,
+  CloseOutlineIcon,
   LocationIcon,
   PriceOutlineIcon,
   UserIcon,
@@ -11,8 +12,10 @@ import {
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import alert from '@/assets/alert.png'
 import { classDetail } from '@/constants/classDetail'
 import { imgList } from '@/constants/classList'
+import { ROUTES } from '@/constants/routes'
 
 interface Clazz {
   category_id: number
@@ -40,10 +43,6 @@ const ClassDetailPage = () => {
     window.scrollTo(0, 0)
   }, [slug])
 
-  const handleNextClick = () => {
-    alert('배우러 가기 버튼이 클릭되었습니다!')
-  }
-
   const [clazz, setClazz] = useState<Clazz | null>(null)
 
   useEffect(() => {
@@ -60,6 +59,10 @@ const ClassDetailPage = () => {
 
     fetch()
   }, [])
+
+  const handleNextClick = () => {
+    navigate(ROUTES.STAMP)
+  }
 
   return (
     <div className="p-[var(--space-200)]">
@@ -177,17 +180,49 @@ const ClassDetailPage = () => {
             {clazz.class_name}
           </Text>
 
-          <div className="mt-[16px]">
-            <Button
-              size="xl"
-              color="danger"
-              stretch
-              disabled={currentParticipants >= maxParticipants}
-              onClick={currentParticipants < maxParticipants ? handleNextClick : undefined}
-            >
-              {currentParticipants >= maxParticipants ? '참여 마감' : '배우러 가기'}
-            </Button>
-          </div>
+          <Dialog>
+            <Dialog.Trigger asChild className="mt-[16px]">
+              <Button
+                size="xl"
+                color="danger"
+                stretch
+                disabled={currentParticipants >= maxParticipants}
+              >
+                {currentParticipants >= maxParticipants ? '참여 마감' : '배우러 가기'}
+              </Button>
+            </Dialog.Trigger>
+
+            <Dialog.Portal>
+              <Dialog.Overlay className="mx-auto max-w-[430px] bg-black" />
+              <Dialog.Content className="top-auto bottom-[-174px] max-w-[430px] translate-y-0 overflow-hidden rounded-tl-md rounded-tr-md bg-white">
+                <Dialog.Header className="flex justify-end p-[16px]">
+                  <Dialog.Close asChild>
+                    <Button size="lg" color="secondary">
+                      <CloseOutlineIcon size={24} />
+                    </Button>
+                  </Dialog.Close>
+                </Dialog.Header>
+                <Dialog.Body className="flex flex-col items-center justify-center p-[16px]">
+                  <Dialog.Description className="w-[120px]">
+                    <img src={alert} alt="알림" />
+                  </Dialog.Description>
+                  <Dialog.Title className="text-center">
+                    신청이 완료되었습니다! <br />
+                    확정되면 알림을 보내드릴게요.
+                  </Dialog.Title>
+                </Dialog.Body>
+                <Dialog.Footer className="p-[16px]">
+                  <Button
+                    className="height-[48px] rounded-lg bg-red-700 py-[16px] text-white"
+                    onClick={handleNextClick}
+                    stretch
+                  >
+                    확인
+                  </Button>
+                </Dialog.Footer>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog>
         </div>
       )}
     </div>
