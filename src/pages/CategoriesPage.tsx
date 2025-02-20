@@ -1,15 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button, Text } from '@goorm-dev/vapor-core'
 import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
 
+import SplashScreen from '@/components/SplashScreen'
 import { CATEGORY_LIST } from '@/constants/categories'
 import { ROUTES } from '@/constants/routes'
 
 const CategoriesPage = () => {
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleCategorySelect = (slug: string) => {
     setSelectedCategory(slug)
@@ -17,8 +26,13 @@ const CategoriesPage = () => {
 
   const handleNextClick = () => {
     if (selectedCategory) {
+      window.scrollTo(0, 0)
       navigate(ROUTES.CLASS_LIST(selectedCategory))
     }
+  }
+
+  if (isLoading) {
+    return <SplashScreen />
   }
 
   return (
@@ -31,8 +45,8 @@ const CategoriesPage = () => {
           <li
             key={category.slug}
             className={clsx(
-              'cursor-pointer rounded-[16px] border border-gray-300 py-4 transition-all',
-              selectedCategory === category.slug && 'border-red-500',
+              'cursor-pointer rounded-[16px] border border-[var(--border-color)] py-4 transition-all',
+              selectedCategory === category.slug && 'border-[var(--red-500)]',
             )}
             onClick={() => handleCategorySelect(category.slug)}
           >
