@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    eslint:
+      run: npm run lint
+    prettier:
+      run: npx prettier --write .
