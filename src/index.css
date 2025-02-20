@@ -3,3 +3,7 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css';
+
+.vapor_core_0_25_1_container_18e2d[data-state='normal']:hover:after {
+  background-color: transparent !important;
+}
