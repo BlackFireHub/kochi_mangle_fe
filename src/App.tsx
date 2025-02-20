@@ -5,6 +5,7 @@ import RootLayout from '@/layouts/RootLayout'
 import CategoriesPage from '@/pages/CategoriesPage'
 import ClassDetailPage from '@/pages/ClassDetailPage'
 import ClassListPage from '@/pages/ClassListPage'
+import StampPage from '@/pages/StampPage'
 
 import './App.css'
 
@@ -16,6 +17,7 @@ const App = () => {
           <Route path={ROUTES.HOME} element={<CategoriesPage />} />
           <Route path={ROUTES.CLASS_LIST(':slug')} element={<ClassListPage />} />
           <Route path={ROUTES.CLASS_DETAIL(':slug', ':id')} element={<ClassDetailPage />} />
+          <Route path={ROUTES.STAMP} element={<StampPage />} />
         </Route>
       </Routes>
     </Router>
