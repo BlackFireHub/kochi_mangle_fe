@@ -4,6 +4,12 @@
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css';
 
+@layer utilities {
+  .bg-splash-image {
+    background-image: url('/splash_bg_red.png');
+  }
+}
+
 .vapor_core_0_25_1_container_18e2d[data-state='normal']:hover:after {
   background-color: transparent !important;
 }
