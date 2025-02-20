@@ -1,7 +1,7 @@
 # Build stage
 FROM krmp-d2hub-idock.9rum.cc/goorm/node:18 AS build
 WORKDIR /usr/src/app
-COPY ./package*.json ./
+COPY ./package.json ./
 COPY ./.npmrc .npmrc
 RUN rm -rf node_modules && npm install
 COPY ./ ./
