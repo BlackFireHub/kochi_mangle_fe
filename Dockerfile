@@ -3,7 +3,7 @@ FROM krmp-d2hub-idock.9rum.cc/goorm/node:18 AS build
 WORKDIR /usr/src/app
 COPY ./package*.json ./
 COPY ./.npmrc .npmrc
-RUN npm ci
+RUN npm i
 COPY ./ ./
 RUN npm run build
 
