@@ -5,7 +5,7 @@ import classList4 from '@/assets/class/class_list_4.jpg'
 import classList5 from '@/assets/class/class_list_5.jpg'
 import classList6 from '@/assets/class/class_list_6.jpg'
 
-export const imgList = [classList1, classList2, classList3, classList4, classList5, classList6];
+export const imgList = [classList1, classList2, classList3, classList4, classList5, classList6]
 
 // export const classList = [
 //   {
