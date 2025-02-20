@@ -45,7 +45,7 @@ const ClassListPage = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get(`http://http://nginx-service/api/category/1`)
+        const response = await axios.get(`/api/category/1`)
         setClassList(response.data)
 
         // 로컬 테스트용
