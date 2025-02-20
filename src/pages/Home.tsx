@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { Button, TextInput } from '@goorm-dev/vapor-core'
 import { SearchOutlineIcon } from '@goorm-dev/vapor-icons'
 
-import { useCounter } from '../store/useCounter'
+import { useCounter } from '@/store/useCounter'
 
 const Home = () => {
   const { count, increase } = useCounter()
@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <h1 className="text-3xl font-bold underline">Home</h1>
       <div ref={ref} role="dialog">
         <p className="text-red">Count: {count}</p>
 
