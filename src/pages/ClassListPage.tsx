@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import { CATEGORY_LIST } from '@/constants/categories'
 import { imgList } from '@/constants/classList'
 import { ROUTES } from '@/constants/routes'
+import { API_URL } from '@/constants/core'
 
 interface Clazz {
   category_id: number
@@ -38,7 +39,7 @@ const ClassListPage = () => {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          `https://k92dd0c11630da.user-app.krampoline.com/api/category/1`,
+          `${API_URL}/api/category/1`,
         )
         setClassList(response.data)
       } catch (err) {

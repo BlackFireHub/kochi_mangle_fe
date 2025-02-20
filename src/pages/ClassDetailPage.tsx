@@ -15,6 +15,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import alert from '@/assets/alert.png'
 import { classDetail } from '@/constants/classDetail'
 import { imgList } from '@/constants/classList'
+import { API_URL } from '@/constants/core'
 import { ROUTES } from '@/constants/routes'
 
 interface Clazz {
@@ -48,9 +49,7 @@ const ClassDetailPage = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get(
-          `https://k92dd0c11630da.user-app.krampoline.com/api/class/${id}`,
-        )
+        const response = await axios.get(`${API_URL}/api/class/${id}`)
         setClazz(response.data)
       } catch (err) {
         console.error(err)
@@ -164,12 +163,12 @@ const ClassDetailPage = () => {
                 </div>
                 <div className="flex items-center">
                   <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.now_participants}
+                    {clazz.now_participants} / {clazz.max_participants}명
                   </Text>
                 </div>
                 <div className="flex items-center">
                   <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.how_much}
+                    {clazz.how_much}원
                   </Text>
                 </div>
               </div>
@@ -177,7 +176,7 @@ const ClassDetailPage = () => {
           </div>
 
           <Text as="p" typography="subtitle1" color="foreground-hint">
-            {clazz.class_name}
+            {clazz.class_detail}
           </Text>
 
           <Dialog>
