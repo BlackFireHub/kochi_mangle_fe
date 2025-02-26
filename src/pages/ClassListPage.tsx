@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { IconButton, Text } from '@goorm-dev/vapor-core'
-import { CalendarIcon, ChevronLeftOutlineIcon, LocationIcon } from '@goorm-dev/vapor-icons'
 import axios from 'axios'
+import { Calendar, ChevronLeft, MapPin } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
@@ -51,26 +50,24 @@ const ClassListPage = () => {
   return (
     <div className="p-[var(--space-200)]">
       <div className="relative flex h-[48px] items-center justify-center">
-        <IconButton
-          rounded
-          shape="invisible"
-          size="xl"
-          color="contrast"
-          disabled={false}
-          aria-label=" 뒤로가기"
+        <button
+          // rounded
+          // shape="invisible"
+          // size="xl"
+          // color="contrast"
+          // disabled={false}
+          // aria-label=" 뒤로가기"
           onClick={() => navigate(-1)}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: -16,
-          }}
+          // style={{
+          //   position: 'absolute',
+          //   top: 0,
+          //   left: -16,
+          // }}
         >
-          <ChevronLeftOutlineIcon size="24" />
-        </IconButton>
+          <ChevronLeft />
+        </button>
 
-        <Text as="h2" typography="heading4">
-          {category?.name || '클래스'}
-        </Text>
+        <h2>{category?.name || '클래스'}</h2>
       </div>
       {/* TODO:: 후순위 기능 */}
       {/* <div className="flex">
@@ -94,32 +91,19 @@ const ClassListPage = () => {
                   />
                 </div>
                 <div className="flex flex-1 flex-col justify-between">
-                  <Text as="h4" typography="heading5">
-                    {classItem.class_name}
-                  </Text>
-                  <Text className="text-[var(--gray-700)]">{classItem.class_article}</Text>
+                  <h4> {classItem.class_name}</h4>
+
+                  <p>{classItem.class_article}</p>
                   <div className="flex">
                     <div className="mr-1 flex">
-                      <CalendarIcon color="red" />
-                      <Text
-                        as="p"
-                        typography="subtitle2"
-                        color="foreground-danger"
-                        className="ml-[1px]"
-                      >
-                        {classItem.due_date} 까지
-                      </Text>
+                      <Calendar color="red" />
+
+                      <p>{classItem.due_date} 까지</p>
                     </div>
                     <div className="flex">
-                      <LocationIcon color="gray" />
-                      <Text
-                        as="p"
-                        typography="subtitle2"
-                        color="foreground-hint"
-                        className="ml-[1px]"
-                      >
-                        {classItem.loc}
-                      </Text>
+                      <MapPin color="gray" />
+
+                      <p> {classItem.loc}</p>
                     </div>
                   </div>
                 </div>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Text } from '@goorm-dev/vapor-core'
 import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
 
 import SplashScreen from '@/components/SplashScreen'
+import { Button } from '@/components/ui/button'
 import { CATEGORY_LIST } from '@/constants/categories'
 import { ROUTES } from '@/constants/routes'
 
@@ -37,9 +37,8 @@ const CategoriesPage = () => {
 
   return (
     <div className="p-[16px]">
-      <Text as="h2" typography="heading4" className="flex h-[48px] items-center justify-center">
-        어떤 이야기가 담긴 음식을 배워볼까요?
-      </Text>
+      <h2>어떤 이야기가 담긴 음식을 배워볼까요?</h2>
+
       <ul className="mt-[16px] grid grid-cols-2 gap-[16px]">
         {CATEGORY_LIST.map((category) => (
           <li
@@ -54,29 +53,23 @@ const CategoriesPage = () => {
               <div className="w-[64px]">
                 <img src={category.image} alt={category.slug} />
               </div>
-              <Text as="h4" typography="heading5">
-                {category.name}
-              </Text>
-              <Text as="p" typography="subtitle2" className="text-center">
+
+              <h4>{category.name}</h4>
+
+              <p>
                 {category.description.split('\n').map((line, index) => (
                   <span key={index}>
                     {line}
                     <br />
                   </span>
                 ))}
-              </Text>
+              </p>
             </div>
           </li>
         ))}
       </ul>
       <div className="mt-[16px]">
-        <Button
-          size="xl"
-          color="danger"
-          stretch
-          disabled={!selectedCategory}
-          onClick={handleNextClick}
-        >
+        <Button color="danger" disabled={!selectedCategory} onClick={handleNextClick}>
           다음
         </Button>
       </div>

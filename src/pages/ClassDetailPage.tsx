@@ -1,22 +1,15 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Dialog, IconButton, Text } from '@goorm-dev/vapor-core'
-import {
-  CalendarIcon,
-  ChevronLeftOutlineIcon,
-  CloseOutlineIcon,
-  LocationIcon,
-  PriceOutlineIcon,
-  UserIcon,
-} from '@goorm-dev/vapor-icons'
 import axios from 'axios'
+import { Banknote, Calendar, ChevronLeft, MapPin, User } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import alert from '@/assets/alert.png'
+// import alert from '@/assets/alert.png'
 import { classDetail } from '@/constants/classDetail'
 import { imgList } from '@/constants/classList'
 import { API_URL } from '@/constants/core'
-import { ROUTES } from '@/constants/routes'
+
+// import { ROUTES } from '@/constants/routes'
 
 interface Clazz {
   category_id: number
@@ -36,8 +29,8 @@ interface Clazz {
 
 const ClassDetailPage = () => {
   const navigate = useNavigate()
-  const maxParticipants = 10
-  const currentParticipants = classDetail[0].participants
+  // const maxParticipants = 10
+  // const currentParticipants = classDetail[0].participants
   const { slug, id } = useParams<{ slug: string; id: string }>()
 
   useEffect(() => {
@@ -60,29 +53,29 @@ const ClassDetailPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleNextClick = () => {
-    navigate(ROUTES.STAMP)
-  }
+  // const handleNextClick = () => {
+  //   navigate(ROUTES.STAMP)
+  // }
 
   return (
     <div className="p-[var(--space-200)]">
       <div className="relative h-[48px]">
-        <IconButton
-          rounded
-          shape="invisible"
-          size="xl"
-          color="contrast"
-          disabled={false}
-          aria-label=" 뒤로가기"
+        <button
+          // rounded
+          // shape="invisible"
+          // size="xl"
+          // color="contrast"
+          // disabled={false}
+          // aria-label=" 뒤로가기"
           onClick={() => navigate(-1)}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: -16,
-          }}
+          // style={{
+          //   position: 'absolute',
+          //   top: 0,
+          //   left: -16,
+          // }}
         >
-          <ChevronLeftOutlineIcon size="24" />
-        </IconButton>
+          <ChevronLeft size="24" />
+        </button>
       </div>
 
       {clazz && (
@@ -95,12 +88,8 @@ const ClassDetailPage = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <Text as="h2" typography="heading4">
-              {clazz.class_name}
-            </Text>
-            <Text as="p" typography="subtitle1" color="foreground-hint">
-              {clazz.class_article}
-            </Text>
+            <h2>{clazz.class_name}</h2>
+            <p>{clazz.class_article}</p>
           </div>
           <div className="mb-[var(--space-200)] rounded-[var(--border-radius-500)] bg-[var(--gray-100)] p-[var(--space-200)]">
             <div className="mb-[var(--space-200)] flex gap-[var(--space-200)]">
@@ -112,12 +101,9 @@ const ClassDetailPage = () => {
                 />
               </div>
               <div>
-                <Text as="h2" typography="heading5">
-                  {clazz.teacher_name}
-                </Text>
-                <Text as="p" typography="subtitle1" color="foreground-hint">
-                  {clazz.teacher_article}
-                </Text>
+                <h2> {clazz.teacher_name}</h2>
+
+                <p> {clazz.teacher_article}</p>
               </div>
             </div>
 
@@ -126,61 +112,45 @@ const ClassDetailPage = () => {
             <div className="flex">
               <div className="mr-[var(--space-200)] flex flex-col gap-[var(--space-100)]">
                 <div className="flex items-center">
-                  <CalendarIcon size={16} className="color-[var(--gray-700)]" />
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    진행기간
-                  </Text>
+                  <Calendar size={16} className="color-[var(--gray-700)]" />
+                  <p>진행기간</p>
                 </div>
                 <div className="flex items-center">
-                  <LocationIcon size={16} className="color-[var(--gray-700)]" />
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    지역
-                  </Text>
+                  <MapPin size={16} className="color-[var(--gray-700)]" />
+                  <p>지역</p>
                 </div>
                 <div className="flex items-center">
-                  <UserIcon size={16} className="color-[var(--gray-700)]" />
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    참여 현황
-                  </Text>
+                  <User size={16} className="color-[var(--gray-700)]" />
+                  <p>참여 현황</p>
                 </div>
                 <div className="flex items-center">
-                  <PriceOutlineIcon size={16} className="color-[var(--gray-700)]" />
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    가격
-                  </Text>
+                  <Banknote />
+                  <p>가격</p>
                 </div>
               </div>
 
               <div className="flex flex-col gap-[var(--space-100)]">
                 <div className="flex items-center">
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.due_date}
-                  </Text>
+                  <p>{clazz.due_date}</p>
                 </div>
                 <div className="flex items-center">
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.due_date}
-                  </Text>
+                  <p>{clazz.due_date}</p>
                 </div>
                 <div className="flex items-center">
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
+                  <p>
                     {clazz.now_participants} / {clazz.max_participants}명
-                  </Text>
+                  </p>
                 </div>
                 <div className="flex items-center">
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.how_much}원
-                  </Text>
+                  <p> {clazz.how_much}원</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <Text as="p" typography="subtitle1" color="foreground-hint">
-            {clazz.class_detail}
-          </Text>
+          <p> {clazz.class_detail}</p>
 
-          <Dialog>
+          {/* <Dialog>
             <Dialog.Trigger asChild className="mt-[16px]">
               <Button
                 size="xl"
@@ -222,7 +192,7 @@ const ClassDetailPage = () => {
                 </Dialog.Footer>
               </Dialog.Content>
             </Dialog.Portal>
-          </Dialog>
+          </Dialog> */}
         </div>
       )}
     </div>
