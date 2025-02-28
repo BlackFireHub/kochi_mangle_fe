@@ -36,16 +36,18 @@ const CategoriesPage = () => {
   }
 
   return (
-    <div className="p-[16px]">
-      <h2>어떤 이야기가 담긴 음식을 배워볼까요?</h2>
+    <div className="p-dimension-200">
+      <h2 className="typography-heading4 h-dimension-600 flex items-center justify-center">
+        어떤 이야기가 담긴 음식을 배워볼까요?
+      </h2>
 
-      <ul className="mt-[16px] grid grid-cols-2 gap-[16px]">
+      <ul className="gap-dimension-200 mt-dimension-200 grid grid-cols-2">
         {CATEGORY_LIST.map((category) => (
           <li
             key={category.slug}
             className={clsx(
-              'cursor-pointer rounded-[16px] border border-[var(--border-color)] py-4 transition-all',
-              selectedCategory === category.slug && 'border-[var(--red-500)]',
+              'border-border cursor-pointer rounded-2xl border py-4 transition-all',
+              selectedCategory === category.slug && 'border-red-500',
             )}
             onClick={() => handleCategorySelect(category.slug)}
           >
@@ -54,9 +56,9 @@ const CategoriesPage = () => {
                 <img src={category.image} alt={category.slug} />
               </div>
 
-              <h4>{category.name}</h4>
+              <h4 className="typography-heading5">{category.name}</h4>
 
-              <p>
+              <p className="typography-subtitle2 text-center text-gray-500">
                 {category.description.split('\n').map((line, index) => (
                   <span key={index}>
                     {line}
@@ -69,7 +71,7 @@ const CategoriesPage = () => {
         ))}
       </ul>
       <div className="mt-[16px]">
-        <Button color="danger" disabled={!selectedCategory} onClick={handleNextClick}>
+        <Button fullWidth disabled={!selectedCategory} onClick={handleNextClick}>
           다음
         </Button>
       </div>
