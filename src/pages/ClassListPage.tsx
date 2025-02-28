@@ -49,8 +49,8 @@ const ClassListPage = () => {
 
   return (
     <div className="p-dimension-200">
-      <div className="relative flex items-center justify-center h-dimension-600">
-        <button onClick={() => navigate(-1)} className="absolute -translate-y-1/2 top-1/2 -left-2">
+      <div className="h-dimension-600 relative flex items-center justify-center">
+        <button onClick={() => navigate(-1)} className="absolute top-1/2 -left-2 -translate-y-1/2">
           <ChevronLeft />
         </button>
 
@@ -68,7 +68,7 @@ const ClassListPage = () => {
             <li key={classItem.class_id} className="mb-dimension-200">
               <Link
                 to={ROUTES.CLASS_DETAIL(safeSlug, classItem.class_id.toString())}
-                className="flex gap-dimension-200"
+                className="gap-dimension-200 flex"
               >
                 <div className="rounded-dimension-200 border-border flex aspect-square w-[100px] overflow-hidden rounded-2xl border bg-gray-100">
                   <img
@@ -77,12 +77,12 @@ const ClassListPage = () => {
                     className="w-full"
                   />
                 </div>
-                <div className="flex flex-col justify-between flex-1">
+                <div className="flex flex-1 flex-col justify-between">
                   <h4 className="typography-heading5"> {classItem.class_name}</h4>
 
-                  <p className="text-gray-700 typography-subtitle1">{classItem.class_article}</p>
+                  <p className="typography-subtitle1 text-gray-700">{classItem.class_article}</p>
                   <div className="flex">
-                    <div className="flex items-center mr-1">
+                    <div className="mr-1 flex items-center">
                       <Calendar size={16} className="text-red-500" />
                       <p className="typography-subtitle1 ml-[1px] text-red-500">
                         {classItem.due_date} 까지
