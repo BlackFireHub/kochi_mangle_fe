@@ -9,7 +9,7 @@ const SplashScreen = () => {
             <img src={logo} alt="Logo" />
           </h1>
           <div className="mt-10 text-center">
-            <h4>
+            <h4 className="typography-heading3 text-white">
               이야기와 함께 <br /> 만들고 맛보는 제주 향토음식 <br /> 고치멩글레?
             </h4>
           </div>
