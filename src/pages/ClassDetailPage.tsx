@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { DialogTitle } from '@radix-ui/react-dialog'
 import axios from 'axios'
 import { Banknote, Calendar, ChevronLeft, MapPin, User } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -162,13 +163,14 @@ const ClassDetailPage = () => {
             </DialogTrigger>
 
             <DialogContent className="top-auto bottom-0 w-[430px] max-w-[430px] translate-y-0 overflow-hidden rounded-tl-2xl rounded-tr-2xl rounded-br-none rounded-bl-none">
+              <DialogTitle className="sr-only">신청 완료</DialogTitle>
               <DialogClose asChild />
               <DialogDescription className="flex flex-col items-center justify-center p-4">
                 <img src={alertImg} alt="알림" className="h-24 w-24" />
-                <p className="typography-heading5 mt-4 text-center text-gray-700">
+                <div className="typography-heading5 mt-4 text-center text-gray-700">
                   신청이 완료되었습니다! <br />
                   확정되면 알림을 보내드릴게요.
-                </p>
+                </div>
               </DialogDescription>
 
               <DialogFooter>
