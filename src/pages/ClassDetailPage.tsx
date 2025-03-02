@@ -4,8 +4,16 @@ import axios from 'axios'
 import { Banknote, Calendar, ChevronLeft, MapPin, User } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import alertImg from '@/assets/alert.png'
 import { Button } from '@/components/ui/button'
-// import alert from '@/assets/alert.png'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { classDetail } from '@/constants/classDetail'
 import { imgList } from '@/constants/classList'
 import { API_URL } from '@/constants/core'
@@ -58,7 +66,7 @@ const ClassDetailPage = () => {
   }
 
   return (
-    <div className="p-dimension-200">
+    <div className="p-dimension-200 relative">
       <div className="h-dimension-600 relative">
         <button onClick={() => navigate(-1)} className="absolute top-1/2 -left-2 -translate-y-1/2">
           <ChevronLeft />
@@ -145,59 +153,34 @@ const ClassDetailPage = () => {
 
           <p> {clazz.class_detail}</p>
 
-          <div className="mt-[16px]">
-            <Button
-              fullWidth
+          <Dialog>
+            <DialogTrigger
               disabled={currentParticipants >= maxParticipants}
-              onClick={handleNextClick}
+              className="mt-[16px] h-[48px] w-full rounded-md bg-red-500 text-white"
             >
-              다음
-            </Button>
-          </div>
+              {currentParticipants >= maxParticipants ? '참여 마감' : '배우러 가기'}
+            </DialogTrigger>
 
-          {/* <Dialog>
-            <Dialog.Trigger asChild className="mt-[16px]">
-              <Button
-                size="xl"
-                color="danger"
-                stretch
-                disabled={currentParticipants >= maxParticipants}
-              >
-                {currentParticipants >= maxParticipants ? '참여 마감' : '배우러 가기'}
-              </Button>
-            </Dialog.Trigger>
+            <DialogContent className="top-auto bottom-0 w-[430px] max-w-[430px] translate-y-0 overflow-hidden rounded-tl-2xl rounded-tr-2xl rounded-br-none rounded-bl-none">
+              <DialogClose asChild />
+              <DialogDescription className="flex flex-col items-center justify-center p-4">
+                <img src={alertImg} alt="알림" className="h-24 w-24" />
+                <p className="typography-heading5 mt-4 text-center text-gray-700">
+                  신청이 완료되었습니다! <br />
+                  확정되면 알림을 보내드릴게요.
+                </p>
+              </DialogDescription>
 
-            <Dialog.Portal>
-              <Dialog.Overlay className="mx-auto max-w-[430px] bg-black" />
-              <Dialog.Content className="top-auto bottom-[-174px] max-w-[430px] translate-y-0 overflow-hidden rounded-tl-md rounded-tr-md bg-white">
-                <Dialog.Header className="flex justify-end p-[16px]">
-                  <Dialog.Close asChild>
-                    <Button size="lg" color="secondary">
-                      <CloseOutlineIcon size={24} />
-                    </Button>
-                  </Dialog.Close>
-                </Dialog.Header>
-                <Dialog.Body className="flex flex-col items-center justify-center p-[16px]">
-                  <Dialog.Description className="w-[120px]">
-                    <img src={alert} alt="알림" />
-                  </Dialog.Description>
-                  <Dialog.Title className="text-center">
-                    신청이 완료되었습니다! <br />
-                    확정되면 알림을 보내드릴게요.
-                  </Dialog.Title>
-                </Dialog.Body>
-                <Dialog.Footer className="p-[16px]">
-                  <Button
-                    className="height-[48px] rounded-lg bg-red-700 py-[16px] text-white"
-                    onClick={handleNextClick}
-                    stretch
-                  >
-                    확인
-                  </Button>
-                </Dialog.Footer>
-              </Dialog.Content>
-            </Dialog.Portal>
-          </Dialog> */}
+              <DialogFooter>
+                <Button
+                  className="h-12 w-full rounded-lg bg-red-500 text-white"
+                  onClick={handleNextClick}
+                >
+                  확인
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       )}
     </div>
