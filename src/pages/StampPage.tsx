@@ -33,39 +33,29 @@ const StampPage = () => {
   }, [])
 
   return (
-    <div className="p-[16px]">
-      <div className="relative h-[48px]">
-        <button
-          // rounded
-          // shape="invisible"
-          // size="xl"
-          // color="contrast"
-          // disabled={false}
-          // aria-label="뒤로가기"
-          onClick={() => navigate(-1)}
-          // style={{
-          //   position: 'absolute',
-          //   top: 0,
-          //   left: -16,
-          // }}
-        >
-          <ChevronLeft size="24" />
+    <div className="p-dimension-200">
+      <div className="h-dimension-600 relative">
+        <button onClick={() => navigate(-1)} className="absolute top-1/2 -left-2 -translate-y-1/2">
+          <ChevronLeft />
         </button>
       </div>
 
-      <h2> 지금까지 {totalFoodCount}개의 음식을 지켜냈어요.</h2>
+      <h2 className="typography-heading4 flex justify-center">
+        {' '}
+        지금까지 {totalFoodCount}개의 음식을 지켜냈어요.
+      </h2>
 
-      <ul className="mt-[16px] grid grid-cols-2 gap-[16px]">
+      <ul className="mt-dimension-200 gap-dimension-200 grid grid-cols-2">
         {Object.entries(stampMap).map(([key, value]) => {
           const isDisabled = value === 0
 
           return (
             <li
               key={key}
-              className="cursor-pointer rounded-[16px] border border-[var(--border-color)] py-[var(--space-500)] transition-all"
+              className="border-border py-dimension-500 cursor-pointer rounded-2xl border transition-all"
             >
               <div className="flex flex-col items-center">
-                <div className="relative mb-[16px] w-[64px]">
+                <div className="mb-dimension-200 relative w-[64px]">
                   <img
                     src={CATEGORY_LIST[parseInt(key) - 1].image}
                     alt={CATEGORY_LIST[parseInt(key) - 1].slug}
@@ -76,11 +66,15 @@ const StampPage = () => {
                   )}
                 </div>
 
-                <h4 className={clsx(isDisabled && 'text-gray-400')}>
+                <h4 className={clsx('typography-heading5', isDisabled && 'text-gray-400')}>
                   {CATEGORY_LIST[parseInt(key) - 1].name}
                 </h4>
 
-                <p className={clsx('text-center', isDisabled && 'text-gray-400')}> {value}개</p>
+                <p
+                  className={clsx('typography-heading6 text-center', isDisabled && 'text-gray-400')}
+                >
+                  {value}개
+                </p>
               </div>
             </li>
           )
