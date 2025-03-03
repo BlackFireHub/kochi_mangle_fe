@@ -1,5 +1,3 @@
-import { Text } from '@goorm-dev/vapor-core'
-
 import logo from '@/assets/splash_logo.png'
 
 const SplashScreen = () => {
@@ -11,9 +9,9 @@ const SplashScreen = () => {
             <img src={logo} alt="Logo" />
           </h1>
           <div className="mt-10 text-center">
-            <Text typography="heading4" className="text-white">
+            <h4 className="typography-heading3 text-white">
               이야기와 함께 <br /> 만들고 맛보는 제주 향토음식 <br /> 고치멩글레?
-            </Text>
+            </h4>
           </div>
         </div>
       </div>

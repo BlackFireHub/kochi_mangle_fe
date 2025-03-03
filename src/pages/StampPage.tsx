@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { IconButton, Text } from '@goorm-dev/vapor-core'
-import { ChevronLeftOutlineIcon } from '@goorm-dev/vapor-icons'
 import axios from 'axios'
 import clsx from 'clsx'
+import { ChevronLeft } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 import { CATEGORY_LIST } from '@/constants/categories'
@@ -13,9 +12,17 @@ type NumberMap = {
   [key: string]: number
 }
 
+const mockStampMap: NumberMap = {
+  '1': 3,
+  '2': 5,
+  '3': 0,
+  '4': 2,
+  '5': 7,
+  '6': 0,
+}
+
 const StampPage = () => {
   const navigate = useNavigate()
-
   const [stampMap, setStampMap] = useState<NumberMap>({})
 
   const totalFoodCount = Object.values(stampMap).reduce((acc, cur) => acc + cur, 0)
@@ -27,6 +34,7 @@ const StampPage = () => {
         setStampMap(response.data)
       } catch (err) {
         console.error(err)
+        setStampMap(mockStampMap)
       }
     }
 
@@ -34,62 +42,49 @@ const StampPage = () => {
   }, [])
 
   return (
-    <div className="p-[16px]">
-      <div className="relative h-[48px]">
-        <IconButton
-          rounded
-          shape="invisible"
-          size="xl"
-          color="contrast"
-          disabled={false}
-          aria-label="뒤로가기"
-          onClick={() => navigate(-1)}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: -16,
-          }}
-        >
-          <ChevronLeftOutlineIcon size="24" />
-        </IconButton>
+    <div className="p-dimension-200">
+      <div className="h-dimension-600 relative">
+        <button onClick={() => navigate(-1)} className="absolute top-1/2 -left-2 -translate-y-1/2">
+          <ChevronLeft />
+        </button>
       </div>
 
-      <Text as="h2" typography="heading4" className="flex h-[48px] items-center justify-center">
+      <h2 className="typography-heading4 flex justify-center">
         지금까지 {totalFoodCount}개의 음식을 지켜냈어요.
-      </Text>
+      </h2>
 
-      <ul className="mt-[16px] grid grid-cols-2 gap-[16px]">
+      <ul className="mt-dimension-200 gap-dimension-200 grid grid-cols-2">
         {Object.entries(stampMap).map(([key, value]) => {
           const isDisabled = value === 0
+          const categoryIndex = parseInt(key) - 1
+          const category = CATEGORY_LIST[categoryIndex] || {
+            image: '',
+            slug: '',
+            name: '알 수 없음',
+          }
 
           return (
             <li
               key={key}
-              className="cursor-pointer rounded-[16px] border border-[var(--border-color)] py-[var(--space-500)] transition-all"
+              className="border-border py-dimension-500 cursor-pointer rounded-2xl border transition-all"
             >
               <div className="flex flex-col items-center">
-                <div className="relative mb-[16px] w-[64px]">
-                  <img
-                    src={CATEGORY_LIST[parseInt(key) - 1].image}
-                    alt={CATEGORY_LIST[parseInt(key) - 1].slug}
-                    className="w-full"
-                  />
+                <div className="mb-dimension-200 relative w-[64px]">
+                  <img src={category.image} alt={category.slug} className="w-full" />
                   {isDisabled && (
                     <div className="absolute inset-0 rounded-full bg-gray-200 opacity-80" />
                   )}
                 </div>
 
-                <Text as="h4" typography="heading5" className={clsx(isDisabled && 'text-gray-400')}>
-                  {CATEGORY_LIST[parseInt(key) - 1].name}
-                </Text>
+                <h4 className={clsx('typography-heading5', isDisabled && 'text-gray-400')}>
+                  {category.name}
+                </h4>
 
-                <Text
-                  as="p"
-                  typography="heading6"
-                  className={clsx('text-center', isDisabled && 'text-gray-400')}
+                <p
+                  className={clsx('typography-heading6 text-center', isDisabled && 'text-gray-400')}
                 >
                   {value}개
-                </Text>
+                </p>
               </div>
             </li>
           )

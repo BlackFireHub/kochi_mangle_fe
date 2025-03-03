@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Text } from '@goorm-dev/vapor-core'
 import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
 
 import SplashScreen from '@/components/SplashScreen'
+import { Button } from '@/components/ui/button'
 import { CATEGORY_LIST } from '@/constants/categories'
 import { ROUTES } from '@/constants/routes'
 
@@ -36,17 +36,18 @@ const CategoriesPage = () => {
   }
 
   return (
-    <div className="p-[16px]">
-      <Text as="h2" typography="heading4" className="flex h-[48px] items-center justify-center">
+    <div className="p-dimension-200">
+      <h2 className="typography-heading4 h-dimension-600 flex items-center justify-center">
         어떤 이야기가 담긴 음식을 배워볼까요?
-      </Text>
-      <ul className="mt-[16px] grid grid-cols-2 gap-[16px]">
+      </h2>
+
+      <ul className="gap-dimension-200 mt-dimension-200 grid grid-cols-2">
         {CATEGORY_LIST.map((category) => (
           <li
             key={category.slug}
             className={clsx(
-              'cursor-pointer rounded-[16px] border border-[var(--border-color)] py-4 transition-all',
-              selectedCategory === category.slug && 'border-[var(--red-500)]',
+              'border-border cursor-pointer rounded-2xl border py-4 transition-all',
+              selectedCategory === category.slug && 'border-red-500',
             )}
             onClick={() => handleCategorySelect(category.slug)}
           >
@@ -54,29 +55,23 @@ const CategoriesPage = () => {
               <div className="w-[64px]">
                 <img src={category.image} alt={category.slug} />
               </div>
-              <Text as="h4" typography="heading5">
-                {category.name}
-              </Text>
-              <Text as="p" typography="subtitle2" className="text-center">
+
+              <h4 className="typography-heading5">{category.name}</h4>
+
+              <p className="typography-subtitle2 text-center text-gray-500">
                 {category.description.split('\n').map((line, index) => (
                   <span key={index}>
                     {line}
                     <br />
                   </span>
                 ))}
-              </Text>
+              </p>
             </div>
           </li>
         ))}
       </ul>
       <div className="mt-[16px]">
-        <Button
-          size="xl"
-          color="danger"
-          stretch
-          disabled={!selectedCategory}
-          onClick={handleNextClick}
-        >
+        <Button fullWidth disabled={!selectedCategory} onClick={handleNextClick}>
           다음
         </Button>
       </div>

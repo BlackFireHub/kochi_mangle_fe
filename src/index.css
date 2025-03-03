@@ -1,15 +1,323 @@
-@layer theme, base, components, utilities;
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import 'tailwindcss';
 
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/preflight.css' layer(base);
-@import 'tailwindcss/utilities.css';
+:root {
+  --font-pretendard: 'Pretendard', sans-serif;
+
+  /* 폰트 크기 변수 */
+  --font-size-025: 10px;
+  --font-size-050: 12px;
+  --font-size-075: 14px;
+  --font-size-100: 16px;
+  --font-size-200: 18px;
+  --font-size-300: 20px;
+  --font-size-400: 24px;
+  --font-size-500: 32px;
+  --font-size-600: 38px;
+  --font-size-700: 48px;
+  --font-size-800: 64px;
+  --font-size-900: 80px;
+  --font-size-1000: 120px;
+
+  /* 폰트 굵기 변수 */
+  --font-weight-400: 400; /* Regular */
+  --font-weight-500: 500; /* Medium */
+  --font-weight-700: 700; /* Bold */
+  --font-weight-800: 800; /* ExtraBold */
+
+  /* 줄간격(Line Height) */
+  --line-height-025: 18px;
+  --line-height-050: 20px;
+  --line-height-075: 22px;
+  --line-height-100: 24px;
+  --line-height-200: 26px;
+  --line-height-300: 28px;
+  --line-height-400: 32px;
+  --line-height-500: 40px;
+  --line-height-600: 46px;
+  --line-height-700: 56px;
+  --line-height-800: 72px;
+  --line-height-900: 78px;
+  --line-height-1000: 128px;
+
+  /* 자간(Letter Spacing) */
+  --letter-spacing-000: 0px;
+  --letter-spacing-100: -0.1px;
+  --letter-spacing-200: -0.2px;
+  --letter-spacing-300: -0.3px;
+  --letter-spacing-400: -0.4px;
+  --letter-spacing-caption: 0.4px;
+
+  /* 색상 변수 */
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(240 5% 10%);
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222.2 47.4% 11.2%);
+  --border: hsl(220 14% 85%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222.2 47.4% 11.2%);
+  --primary: hsl(0 100% 50%); /* Primary 컬러 변경 */
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(210 40% 96.1%);
+  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --destructive: hsl(0 100% 50%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --ring: hsl(215 20.2% 65.1%);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(224 71% 4%);
+  --foreground: hsl(0 0% 100%);
+  --muted: hsl(223 47% 11%);
+  --muted-foreground: hsl(215.4 16.3% 56.9%);
+  --accent: hsl(216 34% 17%);
+  --accent-foreground: hsl(210 40% 98%);
+  --popover: hsl(224 71% 4%);
+  --popover-foreground: hsl(215 20.2% 65.1%);
+  --border: hsl(216 34% 17%);
+  --input: hsl(216 34% 17%);
+  --card: hsl(224 71% 4%);
+  --card-foreground: hsl(213 31% 91%);
+  --primary: hsl(0 100% 50%); /* 다크 모드에서도 유지 */
+  --primary-foreground: hsl(222.2 47.4% 1.2%);
+  --secondary: hsl(222.2 47.4% 11.2%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 63% 31%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --ring: hsl(216 34% 17%);
+  --border: hsl(240 16% 20%);
+}
+
+@theme inline {
+  /* 그레이 스케일 */
+  --color-gray-000: hsl(0 0% 100%);
+  --color-gray-050: hsl(240 5% 98%);
+  --color-gray-100: hsl(240 5% 95%);
+  --color-gray-200: hsl(240 5% 90%);
+  --color-gray-300: hsl(240 5% 80%);
+  --color-gray-400: hsl(240 5% 60%);
+  --color-gray-500: hsl(240 5% 50%);
+  --color-gray-600: hsl(240 5% 40%);
+  --color-gray-700: hsl(240 5% 30%);
+  --color-gray-800: hsl(240 5% 20%);
+  --color-gray-900: hsl(240 5% 10%);
+  --color-gray-950: hsl(240 5% 5%);
+
+  /* 레드 컬러 팔레트 */
+  --color-red-050: hsl(0 100% 95%);
+  --color-red-100: hsl(0 90% 85%);
+  --color-red-200: hsl(0 80% 75%);
+  --color-red-300: hsl(0 70% 65%);
+  --color-red-400: hsl(0 60% 55%);
+  --color-red-500: hsl(0 72% 50%); /* Primary */
+  --color-red-600: hsl(0 62% 42%);
+  --color-red-700: hsl(0 52% 36%);
+  --color-red-800: hsl(0 42% 30%);
+  --color-red-900: hsl(0 32% 25%);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-ring: var(--ring);
+  --border-radius: var(--radius);
+
+  /* border-radius */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+  --radius-5xl: 32px;
+  --radius-full: 40px;
+
+  --spacing-dimension-025: 2px;
+  --spacing-dimension-050: 4px;
+  --spacing-dimension-075: 6px;
+  --spacing-dimension-100: 8px;
+  --spacing-dimension-150: 12px;
+  --spacing-dimension-175: 14px;
+  --spacing-dimension-200: 16px;
+  --spacing-dimension-225: 18px;
+  --spacing-dimension-250: 20px;
+  --spacing-dimension-300: 24px;
+  --spacing-dimension-400: 32px;
+  --spacing-dimension-500: 40px;
+  --spacing-dimension-600: 48px;
+  --spacing-dimension-700: 56px;
+  --spacing-dimension-800: 64px;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-pretendard);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
 
 @layer utilities {
   .bg-splash-image {
     background-image: url('/splash_bg_red.png');
   }
-}
 
-.vapor_core_0_25_1_container_18e2d[data-state='normal']:hover:after {
-  background-color: transparent !important;
+  /* 디스플레이 폰트 */
+  .typography-display1 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-1000);
+    font-weight: var(--font-weight-800);
+    line-height: var(--line-height-1000);
+    letter-spacing: var(--letter-spacing-400);
+  }
+
+  .typography-display2 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-900);
+    font-weight: var(--font-weight-800);
+    line-height: var(--line-height-900);
+    letter-spacing: var(--letter-spacing-400);
+  }
+
+  .typography-display3 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-800);
+    font-weight: var(--font-weight-800);
+    line-height: var(--line-height-800);
+    letter-spacing: var(--letter-spacing-400);
+  }
+
+  .typography-display4 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-700);
+    font-weight: var(--font-weight-800);
+    line-height: var(--line-height-700);
+    letter-spacing: var(--letter-spacing-400);
+  }
+
+  /* 헤딩 폰트 */
+  .typography-heading1 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-600);
+    font-weight: var(--font-weight-700);
+    line-height: var(--line-height-600);
+    letter-spacing: var(--letter-spacing-400);
+  }
+
+  .typography-heading2 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-500);
+    font-weight: var(--font-weight-700);
+    line-height: var(--line-height-500);
+    letter-spacing: var(--letter-spacing-400);
+  }
+
+  .typography-heading3 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-400);
+    font-weight: var(--font-weight-700);
+    line-height: var(--line-height-400);
+    letter-spacing: var(--letter-spacing-300);
+  }
+
+  .typography-heading4 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-300);
+    font-weight: var(--font-weight-700);
+    line-height: var(--line-height-300);
+    letter-spacing: var(--letter-spacing-200);
+  }
+
+  .typography-heading5 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-200);
+    font-weight: var(--font-weight-700);
+    line-height: var(--line-height-200);
+    letter-spacing: var(--letter-spacing-100);
+  }
+
+  .typography-heading6 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-100);
+    font-weight: var(--font-weight-500);
+    line-height: var(--line-height-100);
+    letter-spacing: var(--letter-spacing-100);
+  }
+
+  /* 서브타이틀 */
+  .typography-subtitle1 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-075);
+    font-weight: var(--font-weight-500);
+    line-height: var(--line-height-075);
+    letter-spacing: var(--letter-spacing-100);
+  }
+
+  .typography-subtitle2 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-050);
+    font-weight: var(--font-weight-500);
+    line-height: var(--line-height-050);
+    letter-spacing: var(--letter-spacing-000);
+  }
+
+  /* 바디폰트 */
+  .typography-body1 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-100);
+    font-weight: var(--font-weight-400);
+    line-height: var(--line-height-100);
+    letter-spacing: var(--letter-spacing-100);
+  }
+
+  .typography-body2 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-075);
+    font-weight: var(--font-weight-400);
+    line-height: var(--line-height-075);
+    letter-spacing: var(--letter-spacing-100);
+  }
+
+  .typography-body3 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-050);
+    font-weight: var(--font-weight-400);
+    line-height: var(--line-height-050);
+    letter-spacing: var(--letter-spacing-100);
+  }
+
+  .typography-body4 {
+    font-family: var(--font-pretendard);
+    font-size: var(--font-size-025);
+    font-weight: var(--font-weight-400);
+    line-height: var(--line-height-025);
+    letter-spacing: var(--letter-spacing-000);
+  }
 }

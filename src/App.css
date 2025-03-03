@@ -1,0 +1,13 @@
+/* 오버레이의 너비를 430px로 제한 */
+[data-slot='dialog-overlay'] {
+  max-width: 430px;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+[data-slot='dialog-content'] {
+  border: none;
+  box-shadow: none;
+  background: white;
+}

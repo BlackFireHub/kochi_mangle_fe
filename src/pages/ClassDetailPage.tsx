@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Dialog, IconButton, Text } from '@goorm-dev/vapor-core'
-import {
-  CalendarIcon,
-  ChevronLeftOutlineIcon,
-  CloseOutlineIcon,
-  LocationIcon,
-  PriceOutlineIcon,
-  UserIcon,
-} from '@goorm-dev/vapor-icons'
+import { DialogTitle } from '@radix-ui/react-dialog'
 import axios from 'axios'
+import { Banknote, Calendar, ChevronLeft, MapPin, User } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import alert from '@/assets/alert.png'
+import alertImg from '@/assets/alert.png'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { classDetail } from '@/constants/classDetail'
 import { imgList } from '@/constants/classList'
 import { API_URL } from '@/constants/core'
@@ -37,7 +39,7 @@ interface Clazz {
 const ClassDetailPage = () => {
   const navigate = useNavigate()
   const maxParticipants = 10
-  const currentParticipants = classDetail[0].participants
+  const currentParticipants = classDetail[0].now_participants
   const { slug, id } = useParams<{ slug: string; id: string }>()
 
   useEffect(() => {
@@ -53,6 +55,7 @@ const ClassDetailPage = () => {
         setClazz(response.data)
       } catch (err) {
         console.error(err)
+        setClazz(classDetail[0])
       }
     }
 
@@ -65,46 +68,29 @@ const ClassDetailPage = () => {
   }
 
   return (
-    <div className="p-[var(--space-200)]">
-      <div className="relative h-[48px]">
-        <IconButton
-          rounded
-          shape="invisible"
-          size="xl"
-          color="contrast"
-          disabled={false}
-          aria-label=" 뒤로가기"
-          onClick={() => navigate(-1)}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: -16,
-          }}
-        >
-          <ChevronLeftOutlineIcon size="24" />
-        </IconButton>
+    <div className="p-dimension-200 relative">
+      <div className="h-dimension-600 relative">
+        <button onClick={() => navigate(-1)} className="absolute top-1/2 -left-2 -translate-y-1/2">
+          <ChevronLeft />
+        </button>
       </div>
 
       {clazz && (
         <div>
-          <div className="mb-[var(--space-200)]">
-            <div className="mb-[var(--space-200)] flex h-[193px] overflow-hidden rounded-[var(--space-200)] border border-[var(--border-color)] bg-[var(--gray-100)]">
+          <div className="mb-dimension-200">
+            <div className="mb-dimension-200 rounded-dimension-200 border-border flex h-[193px] overflow-hidden rounded-2xl border bg-gray-100">
               <img
                 src={imgList[clazz.class_id - 1]}
                 alt={clazz.class_name}
                 className="h-full w-full object-cover"
               />
             </div>
-            <Text as="h2" typography="heading4">
-              {clazz.class_name}
-            </Text>
-            <Text as="p" typography="subtitle1" color="foreground-hint">
-              {clazz.class_article}
-            </Text>
+            <h2 className="typography-heading4">{clazz.class_name}</h2>
+            <p className="typography-subtitle1 text-gray-600">{clazz.class_article}</p>
           </div>
-          <div className="mb-[var(--space-200)] rounded-[var(--border-radius-500)] bg-[var(--gray-100)] p-[var(--space-200)]">
-            <div className="mb-[var(--space-200)] flex gap-[var(--space-200)]">
-              <div className="flex h-[48px] w-[48px] overflow-hidden rounded-4xl bg-[var(--gray-100)]">
+          <div className="mb-dimension-200 p-dimension-200 rounded-2xl bg-gray-100">
+            <div className="mb-dimension-200 gap-dimension-200 flex">
+              <div className="flex h-[48px] w-[48px] overflow-hidden rounded-4xl bg-gray-100">
                 <img
                   src={classDetail[0].userImg}
                   alt={clazz.teacher_name}
@@ -112,116 +98,91 @@ const ClassDetailPage = () => {
                 />
               </div>
               <div>
-                <Text as="h2" typography="heading5">
-                  {clazz.teacher_name}
-                </Text>
-                <Text as="p" typography="subtitle1" color="foreground-hint">
-                  {clazz.teacher_article}
-                </Text>
+                <h2 className="typography-heading5"> {clazz.teacher_name}</h2>
+                <p className="typography-subtitle1"> {clazz.teacher_article}</p>
               </div>
             </div>
 
-            <hr className="my-[var(--space-200)] border-[var(--border-color)]" />
+            <hr className="my-dimension-200 border-border" />
 
             <div className="flex">
-              <div className="mr-[var(--space-200)] flex flex-col gap-[var(--space-100)]">
+              <div className="mr-dimension-200 gap-dimension-100 flex flex-col">
                 <div className="flex items-center">
-                  <CalendarIcon size={16} className="color-[var(--gray-700)]" />
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    진행기간
-                  </Text>
+                  <div className="mr-1 flex h-[18px] w-[18px] items-center justify-center">
+                    <Calendar size={16} className="color-gray-700" />
+                  </div>
+                  <p className="typography-subtitle1 text-gray-700">진행기간</p>
                 </div>
                 <div className="flex items-center">
-                  <LocationIcon size={16} className="color-[var(--gray-700)]" />
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    지역
-                  </Text>
+                  <div className="mr-1 flex h-[18px] w-[18px] items-center justify-center">
+                    <MapPin size={16} className="color-gray-700" />
+                  </div>
+                  <p className="typography-subtitle1 text-gray-700">지역</p>
                 </div>
                 <div className="flex items-center">
-                  <UserIcon size={16} className="color-[var(--gray-700)]" />
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    참여 현황
-                  </Text>
+                  <div className="mr-1 flex h-[18px] w-[18px] items-center justify-center">
+                    <User size={16} className="color-gray-700" />
+                  </div>
+                  <p className="typography-subtitle1 text-gray-700">참여 현황</p>
                 </div>
                 <div className="flex items-center">
-                  <PriceOutlineIcon size={16} className="color-[var(--gray-700)]" />
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    가격
-                  </Text>
+                  <div className="mr-1 flex h-[18px] w-[18px] items-center justify-center">
+                    <Banknote size={16} className="color-gray-700" />
+                  </div>
+                  <p className="typography-subtitle1 text-gray-700">가격</p>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-[var(--space-100)]">
+              <div className="gap-dimension-100 flex flex-col">
                 <div className="flex items-center">
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.due_date}
-                  </Text>
+                  <p className="typography-subtitle1 text-gray-700">{clazz.due_date}</p>
                 </div>
                 <div className="flex items-center">
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.due_date}
-                  </Text>
+                  <p className="typography-subtitle1 text-gray-700">{clazz.due_date}</p>
                 </div>
                 <div className="flex items-center">
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.now_participants} / {clazz.max_participants}명
-                  </Text>
+                  <p className="typography-subtitle1 text-gray-700">
+                    <span className="text-red-500"> {clazz.now_participants}</span> /{' '}
+                    {clazz.max_participants}명
+                  </p>
                 </div>
                 <div className="flex items-center">
-                  <Text as="p" typography="subtitle1" color="foreground-secondary" className="ml-1">
-                    {clazz.how_much}원
-                  </Text>
+                  <p className="typography-body2 text-gray-600"> {clazz.how_much}원</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <Text as="p" typography="subtitle1" color="foreground-hint">
-            {clazz.class_detail}
-          </Text>
+          <p> {clazz.class_detail}</p>
 
           <Dialog>
-            <Dialog.Trigger asChild className="mt-[16px]">
-              <Button
-                size="xl"
-                color="danger"
-                stretch
-                disabled={currentParticipants >= maxParticipants}
-              >
-                {currentParticipants >= maxParticipants ? '참여 마감' : '배우러 가기'}
-              </Button>
-            </Dialog.Trigger>
+            <DialogTrigger
+              disabled={currentParticipants >= maxParticipants}
+              className="mt-[16px] h-[48px] w-full rounded-md bg-red-500 text-white"
+            >
+              {currentParticipants >= maxParticipants ? '참여 마감' : '배우러 가기'}
+            </DialogTrigger>
 
-            <Dialog.Portal>
-              <Dialog.Overlay className="mx-auto max-w-[430px] bg-black" />
-              <Dialog.Content className="top-auto bottom-[-174px] max-w-[430px] translate-y-0 overflow-hidden rounded-tl-md rounded-tr-md bg-white">
-                <Dialog.Header className="flex justify-end p-[16px]">
-                  <Dialog.Close asChild>
-                    <Button size="lg" color="secondary">
-                      <CloseOutlineIcon size={24} />
-                    </Button>
-                  </Dialog.Close>
-                </Dialog.Header>
-                <Dialog.Body className="flex flex-col items-center justify-center p-[16px]">
-                  <Dialog.Description className="w-[120px]">
-                    <img src={alert} alt="알림" />
-                  </Dialog.Description>
-                  <Dialog.Title className="text-center">
-                    신청이 완료되었습니다! <br />
-                    확정되면 알림을 보내드릴게요.
-                  </Dialog.Title>
-                </Dialog.Body>
-                <Dialog.Footer className="p-[16px]">
-                  <Button
-                    className="height-[48px] rounded-lg bg-red-700 py-[16px] text-white"
-                    onClick={handleNextClick}
-                    stretch
-                  >
-                    확인
-                  </Button>
-                </Dialog.Footer>
-              </Dialog.Content>
-            </Dialog.Portal>
+            <DialogContent className="top-auto bottom-0 w-[430px] max-w-[430px] translate-y-0 overflow-hidden rounded-tl-2xl rounded-tr-2xl rounded-br-none rounded-bl-none">
+              <DialogTitle className="sr-only">신청 완료</DialogTitle>
+              <DialogClose asChild />
+              <DialogDescription className="flex flex-col items-center justify-center p-4">
+                <img src={alertImg} alt="알림" className="h-24 w-24" />
+                <div className="typography-heading5 mt-4 text-center text-gray-700">
+                  신청이 완료되었습니다! <br />
+                  확정되면 알림을 보내드릴게요.
+                </div>
+              </DialogDescription>
+
+              <DialogFooter>
+                <Button
+                  className="h-12 w-full rounded-lg bg-red-500 text-white"
+                  onClick={handleNextClick}
+                >
+                  확인
+                </Button>
+              </DialogFooter>
+            </DialogContent>
           </Dialog>
         </div>
       )}
