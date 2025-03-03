@@ -39,7 +39,7 @@ interface Clazz {
 const ClassDetailPage = () => {
   const navigate = useNavigate()
   const maxParticipants = 10
-  const currentParticipants = classDetail[0].participants
+  const currentParticipants = classDetail[0].now_participants
   const { slug, id } = useParams<{ slug: string; id: string }>()
 
   useEffect(() => {
@@ -55,6 +55,7 @@ const ClassDetailPage = () => {
         setClazz(response.data)
       } catch (err) {
         console.error(err)
+        setClazz(classDetail[0])
       }
     }
 
